@@ -1,0 +1,23 @@
+services:
+  churn-api:
+    build: .
+    container_name: telco-churn-api
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_ARTIFACT_PATH: /app/artifacts/model.joblib
+      STORE_PREDICTIONS: "true"
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    command: python -m uvicorn src.app.main:app --host 0.0.0.0 --port 8000
+
+  churn-dashboard:
+    build: .
+    container_name: telco-churn-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    command: streamlit run dashboards/streamlit_dashboard.py --server.address 0.0.0.0 --server.port 8501
