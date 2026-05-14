@@ -1,0 +1,33 @@
+project:
+  name: telco-customer-churn-realworld-ml
+  target: Churn
+  random_state: 42
+
+paths:
+  raw_data: data/raw/Telco-Customer-Churn.csv
+  artifacts_dir: artifacts
+  processed_data: data/processed/telco_churn_cleaned.csv
+  prediction_db: artifacts/churn_predictions.sqlite
+  feedback_log: artifacts/feedback_log.csv
+
+training:
+  test_size: 0.20
+  validation_size: 0.20
+  threshold_metric: retention_value
+  n_estimators: 250
+  max_depth: 3
+
+business:
+  save_value: 200.0
+  contact_cost: 10.0
+  retention_effectiveness: 0.35
+  high_risk_threshold: 0.70
+  medium_risk_threshold: 0.40
+  actions:
+    high: Retention specialist call, personalized discount, and service quality review
+    medium: Targeted retention email, plan review, and add-on support offer
+    low: Standard customer success nurture campaign
+
+monitoring:
+  psi_alert_threshold: 0.20
+  max_category_share_change: 0.15
