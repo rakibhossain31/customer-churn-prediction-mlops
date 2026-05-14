@@ -1,0 +1,2 @@
+customer_id,prediction_date,churn_probability,recommended_action,actual_churn_after_30_days,campaign_cost,revenue_saved,notes
+7590-VHVEG,2026-05-14,0.82,"Retention specialist call, personalized discount, and service quality review",0,10,240,Example feedback row after outcome is known
